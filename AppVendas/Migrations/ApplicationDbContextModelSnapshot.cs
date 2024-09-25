@@ -72,10 +72,26 @@ namespace AppVendas.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ProdutoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("QtdadeVendida")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ValorTotalDoItem")
+                        .HasColumnType("float");
+
                     b.Property<Guid>("VendaId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("VendaId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ItemDaVendaId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.HasIndex("VendaId1");
 
                     b.ToTable("ItensDaVenda", (string)null);
                 });
@@ -85,6 +101,9 @@ namespace AppVendas.Migrations
                     b.Property<Guid>("ProdutoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("CadastroAtivo")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("CategoriaId")
                         .HasColumnType("uniqueidentifier");
@@ -101,6 +120,8 @@ namespace AppVendas.Migrations
 
                     b.HasKey("ProdutoId");
 
+                    b.HasIndex("CategoriaId");
+
                     b.ToTable("Produtos", (string)null);
                 });
 
@@ -113,10 +134,10 @@ namespace AppVendas.Migrations
                     b.Property<Guid?>("ClienteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("DataVenda")
+                    b.Property<DateTime>("DataVenda")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("ItemDaVendaId")
+                    b.Property<Guid>("ItemDaVendaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NotaFiscal")
@@ -130,6 +151,34 @@ namespace AppVendas.Migrations
                     b.HasIndex("ClienteId");
 
                     b.ToTable("Vendas", (string)null);
+                });
+
+            modelBuilder.Entity("AppVendas.Models.ItemDaVenda", b =>
+                {
+                    b.HasOne("AppVendas.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AppVendas.Models.Venda", "Venda")
+                        .WithMany()
+                        .HasForeignKey("VendaId1");
+
+                    b.Navigation("Produto");
+
+                    b.Navigation("Venda");
+                });
+
+            modelBuilder.Entity("AppVendas.Models.Produto", b =>
+                {
+                    b.HasOne("AppVendas.Models.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("AppVendas.Models.Venda", b =>

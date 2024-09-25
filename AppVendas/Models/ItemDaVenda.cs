@@ -2,6 +2,8 @@
 {
     public class ItemDaVenda
     {
+
+
         public Guid ItemDaVendaId { get; set; }
 
         public Guid VendaId { get; set; }

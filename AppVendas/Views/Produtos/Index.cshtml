@@ -1,17 +1,26 @@
 ﻿@model IEnumerable<AppVendas.Models.Produto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Prodtuos";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-between my-5 align-items-center">
+    <span class="display-6 w-75 justify-content-center">Cadastro de Produtos</span>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+
+
+    <a asp-action="Create" class="btn btn-secondary btn-lg px-3 w-25 d-flex align-items-center justify-content-center">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        <span class=" fs-4 ms-2">Adicionar</span>
+    </a>
+
+    </div>
+
+
+
+    <table class="table table-responsive table-hover table-striped">
     <thead>
-        <tr>
+        <tr class="bg-black text-light">
             <th>
                 @Html.DisplayNameFor(model => model.ProdutoNome)
             </th>
@@ -32,7 +41,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr class="text-light">
             <td>
                 @Html.DisplayFor(modelItem => item.ProdutoNome)
             </td>
@@ -49,9 +58,14 @@
                 @Html.DisplayFor(modelItem => item.Categoria.CategoriaId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProdutoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProdutoId">Delete</a>
+                    <a class="btn btn-outline-info btn-sm" asp-action="Edit" asp-route-id="@item.ProdutoId">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                        Editar
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@item.ProdutoId">
+                        <ion-icon name="trash-outline"></ion-icon>
+                        Excluir
+                    </a>
             </td>
         </tr>
 }
