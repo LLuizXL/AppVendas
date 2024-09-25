@@ -1,53 +1,79 @@
 ﻿@model AppVendas.Models.Produto
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Cadastro de Produtos";
 }
 
-<h1>Create</h1>
+<div class="d-flex justify-content-between my-5 align-items-center">
+    <span class="display-6 w-75 justify-content-center">Cadastro de Produtos</span>
+</div>
 
-<h4>Produto</h4>
-<hr />
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="row">
-
- 
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+    <div class="col-12">
+       <div class="form-group">
                 <label asp-for="ProdutoNome" class="control-label"></label>
                 <input asp-for="ProdutoNome" class="form-control" />
                 <span asp-validation-for="ProdutoNome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Valor" class="control-label"></label>
-                <input asp-for="Valor" class="form-control" />
-                <span asp-validation-for="Valor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="QtdEstoque" class="control-label"></label>
-                <input asp-for="QtdEstoque" class="form-control" />
-                <span asp-validation-for="QtdEstoque" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="CadastroAtivo" /> @Html.DisplayNameFor(model => model.CadastroAtivo)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoriaId" class="control-label"></label>
-                <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+       </div>
+     </div>
+</div>
+
+<div class="row">
+   <div class="col-12">
+     <div class="form-group">
+        <label asp-for="Valor" class="control-label"></label>
+        <input asp-for="Valor" class="form-control" />
+        <span asp-validation-for="Valor" class="text-danger"></span>
+     </div>
+   </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+      <div class="form-group">
+           <label asp-for="QtdEstoque" class="control-label"></label>
+           <input asp-for="QtdEstoque" class="form-control" />
+           <span asp-validation-for="QtdEstoque" class="text-danger"></span>
+      </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+
+ <input type="hidden" value="true" class="form-check-input" />      
+  
+
+<div class="row">
+    <div class="col-12">
+         <div class="form-group">
+                <label asp-for="CategoriaId" class="control-label"></label>
+                <select asp-for="CategoriaId" class ="form-control" asp-items="ViewBag.CategoriaId"></select>
+         </div>
+    </div>
 </div>
+
+    <div class="row">
+        <div class="col-4 mt-1">
+            <div class="form-group">
+                <button type="submit" class=" btn btn-primary d-flex px-5 align-items-center justify-content-center mt-3 w-100 py-3">
+                    <ion-icon name="save" class="me-2"></ion-icon> Salvar
+                </button>
+            </div>
+        </div>
+
+        <div class="col-4"></div>
+        <div class="col-4 mt-1">
+            <a class="btn btn-secondary d-flex align-items-center  justify-content-center px-5 mt-3 w-100 py-3" asp-action="Index">
+                <ion-icon name="caret-back-outline" class="me-2"></ion-icon>
+                Voltar
+            </a>
+        </div>
+    </div>
+        </form>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
